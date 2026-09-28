@@ -1,0 +1,1 @@
+# MiniProjekt-Softwarearkitektur-MiniReddit
