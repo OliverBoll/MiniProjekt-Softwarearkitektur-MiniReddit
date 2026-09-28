@@ -31,28 +31,26 @@ public class DataService
       Post post = db.Posts.FirstOrDefault()!;
       if (post == null)
       {
-         List<Comments> commentsList = new List<Comments>()
-         {
-            new Comments
-            {
-               Text = "Test", User = user, Date = DateTime.Now, Vote = 0
-            },
-            new Comments
-            {
-               Text = "Test 2", User = user, Date = DateTime.Now, Vote = 2
-            },
-            new Comments
-            {
-               Text = "Test 3", User = user, Date = DateTime.Now, Vote = 5
-            }
-         };
-
          db.Posts.Add(new Post
          {
             Date = DateTime.Now,
             User = user,
             Vote = 0,
-            Comment = commentsList,
+            Comment = new List<Comments>()
+            {
+               new Comments
+               {
+                  Text = "Test", User = user, Date = DateTime.Now, Vote = 0
+               },
+               new Comments
+               {
+                  Text = "Test 2", User = user, Date = DateTime.Now, Vote = 2
+               },
+               new Comments
+               {
+                  Text = "Test 3", User = user, Date = DateTime.Now, Vote = 5
+               }
+            },
             Title = "Post test"
          });
       }
@@ -62,7 +60,10 @@ public class DataService
 
    public List<Post> GetPosts()
    {
-      return db.Posts.Include(p => p.User).ToList();
+      return db.Posts
+         .Include(p => p.User)
+         .Include(p => p.Comment)
+         .ToList();
    }
 
    public List<User> GetUsers()
