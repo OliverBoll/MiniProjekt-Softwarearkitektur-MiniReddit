@@ -24,6 +24,11 @@ builder.Services.AddDbContext<PostContext>(options =>
 // Tilføj DataService så den kan bruges i endpoints
 builder.Services.AddScoped<DataService>();
 
+builder.Services.Configure<JsonOptions>(options =>
+{
+    options.SerializerOptions.ReferenceHandler =
+        System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+});
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -55,14 +60,12 @@ if (app.Environment.IsDevelopment())
 
 app.MapGet("/api/posts", (DataService service) =>
 {
-    return service.GetPosts().Select(p => new
-    {
-        title = p.Title,
-        date = p.Date,
-        user = p.User.Name,
-        vote = p.Vote,
-        comment = p.Comment.Select(c => new { Text = c.Text })
-    });
+    return service.GetPosts();
 });
+
+app.MapGet("/api/posts/{id}", (DataService service, int id) =>
+{
+    return service.GetPost(id);
+}); 
 
 app.Run();

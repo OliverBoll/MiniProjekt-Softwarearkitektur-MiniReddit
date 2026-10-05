@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MiniProject.Data;
 
@@ -10,14 +11,16 @@ using MiniProject.Data;
 namespace MiniProject.Migrations
 {
     [DbContext(typeof(PostContext))]
-    partial class PostContextModelSnapshot : ModelSnapshot
+    [Migration("20261005082335_UpdateModels")]
+    partial class UpdateModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.12");
 
-            modelBuilder.Entity("MiniProject.Models.Comments", b =>
+            modelBuilder.Entity("shared.Models.Comments", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -48,11 +51,15 @@ namespace MiniProject.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("MiniProject.Models.Post", b =>
+            modelBuilder.Entity("shared.Models.Post", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
@@ -74,7 +81,7 @@ namespace MiniProject.Migrations
                     b.ToTable("Posts");
                 });
 
-            modelBuilder.Entity("MiniProject.Models.User", b =>
+            modelBuilder.Entity("shared.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -89,13 +96,13 @@ namespace MiniProject.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("MiniProject.Models.Comments", b =>
+            modelBuilder.Entity("shared.Models.Comments", b =>
                 {
-                    b.HasOne("MiniProject.Models.Post", null)
+                    b.HasOne("shared.Models.Post", null)
                         .WithMany("Comment")
                         .HasForeignKey("PostId");
 
-                    b.HasOne("MiniProject.Models.User", "User")
+                    b.HasOne("shared.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -104,9 +111,9 @@ namespace MiniProject.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("MiniProject.Models.Post", b =>
+            modelBuilder.Entity("shared.Models.Post", b =>
                 {
-                    b.HasOne("MiniProject.Models.User", "User")
+                    b.HasOne("shared.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -115,7 +122,7 @@ namespace MiniProject.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("MiniProject.Models.Post", b =>
+            modelBuilder.Entity("shared.Models.Post", b =>
                 {
                     b.Navigation("Comment");
                 });

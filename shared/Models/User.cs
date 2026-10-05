@@ -1,4 +1,4 @@
-namespace MiniProject.Models;
+namespace shared.Models;
 
 public class User
 {

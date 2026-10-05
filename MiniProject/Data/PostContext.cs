@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using MiniProject.Models;
+using shared.Models;
 
 namespace MiniProject.Data
 {

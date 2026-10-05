@@ -2,14 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.JavaScript;
 
-namespace MiniProject.Models;
+namespace shared.Models;
 
 public class Post
 {
     public int Id { get; set; }
     public string Title { get; set; }
+    public string Content {get;set;}
     public DateTime Date { get; set; }
     public User User { get; set; }
-    public int Vote { get; set; }
+    public int Upvotes { get; set; }
+    public int Downvotes { get; set; }
     public List<Comments> Comment { get; set; } = new();
 }

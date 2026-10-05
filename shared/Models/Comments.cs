@@ -1,6 +1,6 @@
-using System;
+using System; 
 
-namespace MiniProject.Models;
+namespace shared.Models;
 
 public class Comments
 {
@@ -8,5 +8,6 @@ public class Comments
     public string Text { get; set; }
     public User User { get; set; }
     public DateTime Date { get; set; }
-    public int Vote { get; set; }
+    public int Upvotes { get; set; }
+    public int Downvotes { get; set; }
 }

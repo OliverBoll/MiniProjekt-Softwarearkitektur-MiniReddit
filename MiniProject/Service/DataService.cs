@@ -2,7 +2,8 @@ using System.Runtime.InteropServices.JavaScript;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 using MiniProject.Data;
-using MiniProject.Models;
+using shared.Models;
+using SQLitePCL;
 
 namespace MiniProject.Service;
 
@@ -35,20 +36,22 @@ public class DataService
          {
             Date = DateTime.Now,
             User = user,
-            Vote = 0,
+            Upvotes = 5,
+            Downvotes = 2,
+            Content = "Dette er et test Post",
             Comment = new List<Comments>()
             {
                new Comments
                {
-                  Text = "Test", User = user, Date = DateTime.Now, Vote = 0
+                  Text = "Test", User = user, Date = DateTime.Now, Upvotes = 1, Downvotes = 0
                },
                new Comments
                {
-                  Text = "Test 2", User = user, Date = DateTime.Now, Vote = 2
+                  Text = "Test 2", User = user, Date = DateTime.Now, Upvotes = 3, Downvotes = 0
                },
                new Comments
                {
-                  Text = "Test 3", User = user, Date = DateTime.Now, Vote = 5
+                  Text = "Test 3", User = user, Date = DateTime.Now, Upvotes = 5, Downvotes = 3
                }
             },
             Title = "Post test"
@@ -66,9 +69,16 @@ public class DataService
          .ToList();
    }
 
+   public Post? GetPost(int id)
+   {
+      return db.Posts
+         .Include(p => p.User)
+         .Include(p => p.Comment)
+         .FirstOrDefault(p => p.Id == id);
+   }
+
    public List<User> GetUsers()
    {
       return db.Users.ToList();
    }
 }
-   
