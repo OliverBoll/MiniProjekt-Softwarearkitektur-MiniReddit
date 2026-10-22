@@ -89,4 +89,26 @@ public class DataService
       db.SaveChanges();
       return "Post created";
    }
+
+   public string CreateComment(string text, int userId, int postId)
+   {
+      User? user = db.Users.FirstOrDefault(u => u.Id == userId);
+      Post? post = db.Posts.FirstOrDefault(p => p.Id == postId);
+      
+      if (user == null || post == null)
+      {
+        return "User or Post not found";
+      } 
+
+      Comments comment = new Comments
+      {
+        Text = text,
+        User = user,
+      };
+
+      post.Comment.Add(comment);
+
+      db.SaveChanges();
+      return "Comment Created";
+   }
 }
