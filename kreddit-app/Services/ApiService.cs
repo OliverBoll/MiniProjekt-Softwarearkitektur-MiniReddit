@@ -36,8 +36,16 @@ public class ApiService
     {
         string url = $"{baseAPI}posts/createpost";
         HttpResponseMessage msg = await http.PostAsJsonAsync(url, new { Title, Content, UserId });
-        string json = await msg.Content.ReadAsStringAsync();
-        Post? newPost = JsonSerializer.Deserialize<Post>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
+
+        //string result = await msg.Content.ReadAsStringAsync();
+        
+        string json = msg.Content.ReadAsStringAsync().Result;
+        
+        // Deserialize the JSON string to a Comment object
+        Post? newPost = JsonSerializer.Deserialize<Post>(json, new JsonSerializerOptions {
+            PropertyNameCaseInsensitive = true
+        });
+        
         return newPost;
     }
 
