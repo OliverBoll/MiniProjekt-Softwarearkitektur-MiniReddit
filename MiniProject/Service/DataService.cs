@@ -16,50 +16,67 @@ public class DataService
       this.db = db;
    }
 
-   public void SeedData()
-   {
-      User user = db.Users.FirstOrDefault()!;
 
-      if (user == null)
-      {
-         user = new User { Name = "Jacob", Id = 1};
-         db.Users.Add(user);
-         db.Users.Add(new User { Name = "Casper" });
-         db.Users.Add(new User { Name = "Oliver" });
+public void SeedData()
+{
+    User? user = db.Users.FirstOrDefault();
 
-      }
+    if (user == null)
+    {
+        user = new User { Name = "Jacob" };
+        db.Users.Add(user);
 
-      Post post = db.Posts.FirstOrDefault()!;
-      if (post == null)
-      {
-         db.Posts.Add(new Post
-         {
+        db.Users.Add(new User { Name = "Casper" });
+        db.Users.Add(new User { Name = "Oliver" });
+
+        db.SaveChanges();
+    }
+
+    Post? post = db.Posts.FirstOrDefault();
+
+    if (post == null)
+    {
+        db.Posts.Add(new Post
+        {
             Date = DateTime.Now,
-            User = user,
+            User = user!,
             Upvotes = 5,
             Downvotes = 2,
             Content = "Dette er et test Post",
             Comment = new List<Comments>()
             {
-               new Comments
-               {
-                  Text = "Test", User = user, Date = DateTime.Now, Upvotes = 1, Downvotes = 0
-               },
-               new Comments
-               {
-                  Text = "Test 2", User = user, Date = DateTime.Now, Upvotes = 3, Downvotes = 0
-               },
-               new Comments
-               {
-                  Text = "Test 3", User = user, Date = DateTime.Now, Upvotes = 5, Downvotes = 3
-               }
+                new Comments
+                {
+                    Text = "Test",
+                    User = user!,
+                    Date = DateTime.Now,
+                    Upvotes = 1,
+                    Downvotes = 0
+                },
+                new Comments
+                {
+                    Text = "Test 2",
+                    User = user!,
+                    Date = DateTime.Now,
+                    Upvotes = 3,
+                    Downvotes = 0
+                },
+                new Comments
+                {
+                    Text = "Test 3",
+                    User = user!,
+                    Date = DateTime.Now,
+                    Upvotes = 5,
+                    Downvotes = 3
+                }
             },
             Title = "Post test"
-         });
-      }
+        });
+    }
 
-      db.SaveChanges();
-   }
+    db.SaveChanges();
+}
+
 
    public List<Post> GetPosts()
    {

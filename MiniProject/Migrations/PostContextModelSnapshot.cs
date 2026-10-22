@@ -64,14 +64,14 @@ namespace MiniProject.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("Downvotes")
+                    b.Property<int>("Downvotes")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("Upvotes")
+                    b.Property<int>("Upvotes")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("UserId")
