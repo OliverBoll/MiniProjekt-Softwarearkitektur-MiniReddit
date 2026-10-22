@@ -134,5 +134,27 @@ public class DataService
       return "Downvote made";
    }
    
+   public string PostCommentUpvote(int postid, int commentid)
+   {
+      Post? post = db.Posts.FirstOrDefault(p => p.Id == postid);
+      Comments comment = post.Comment.FirstOrDefault(c => c.Id == commentid);
+         
+      comment.Upvotes++;
+      
+      db.SaveChanges();
+
+      return "Comment upvote made";
+   }
    
+   public string PostCommentDownvote(int postid, int commentid)
+   {
+      Post? post = db.Posts.FirstOrDefault(p => p.Id == postid);
+      Comments comment = post.Comment.FirstOrDefault(c => c.Id == commentid);
+         
+      comment.Downvotes++;
+      
+      db.SaveChanges();
+
+      return "Comment downvote made";
+   }
 }
