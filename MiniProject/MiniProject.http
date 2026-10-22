@@ -14,3 +14,12 @@ Content-Type: application/json
   "content": "Dette er indholdet af mit nye indlæg.",
   "userId": 1
 }
+
+### Opret ny kommentar til et post
+POST {{MiniProject_HostAddress}}/api/posts/3/comments
+Content-Type: application/json
+
+{
+  "text": "Dette er en rigtig god kommentar!",
+  "user": 1
+}
