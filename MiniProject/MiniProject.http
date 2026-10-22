@@ -10,7 +10,7 @@ POST {{MiniProject_HostAddress}}/api/posts
 Content-Type: application/json
 
 {
-  "title": "Mit første Post",
+  "title": "Mit andet Post",
   "content": "Dette er indholdet af mit nye indlæg.",
   "userId": 1
 }
