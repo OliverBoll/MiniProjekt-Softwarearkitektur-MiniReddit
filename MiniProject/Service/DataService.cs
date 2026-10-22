@@ -116,7 +116,7 @@ public class DataService
    {
       Post? post = db.Posts.FirstOrDefault(p => p.Id == postid);
 
-      post.Upvotes = post.Upvotes++;
+      post.Upvotes++;
       
       db.SaveChanges();
 
@@ -127,7 +127,7 @@ public class DataService
    {
       Post? post = db.Posts.FirstOrDefault(p => p.Id == postid);
 
-      post.Downvotes = post.Downvotes--;
+      post.Downvotes++;
       
       db.SaveChanges();
 
