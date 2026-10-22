@@ -1,10 +1,13 @@
-﻿@page "/"
+﻿@inject NavigationManager navLogin
+@page "/"
 
 <PageTitle>Kreddit</PageTitle>
 
 <h1>Welcome to Kreddit</h1>
 
 <p>Below you can read the most recent posts.</p>
+
+<button @onclick="NavigerTilSide">Create Post</button>
 
 <PostList></PostList>
 
@@ -16,3 +19,10 @@
     <li>Cannot create new posts, only new comments.</li>
     <li>No user selection. User is hardcoded (Mads).</li>
 </ul>
+
+@code{
+    public void NavigerTilSide()
+    {
+          navLogin.NavigateTo("CreatePost"); 
+    }
+}

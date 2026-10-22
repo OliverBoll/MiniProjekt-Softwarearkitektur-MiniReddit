@@ -22,7 +22,7 @@ public class DataService
 
       if (user == null)
       {
-         user = new User { Name = "Jacob" };
+         user = new User { Name = "Jacob", Id = 1};
          db.Users.Add(user);
          db.Users.Add(new User { Name = "Casper" });
          db.Users.Add(new User { Name = "Oliver" });

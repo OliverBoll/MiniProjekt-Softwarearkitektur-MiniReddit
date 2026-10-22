@@ -11,7 +11,7 @@ public class Post
     public string Content {get;set;}
     public DateTime Date { get; set; } = DateTime.Now;
     public User User { get; set; }
-    public int Upvotes { get; set; }
-    public int Downvotes { get; set; }
-    public List<Comments> Comment { get; set; } = new();
+    public int? Upvotes { get; set; }
+    public int? Downvotes { get; set; }
+    public List<Comments>? Comment { get; set; } = new();
 }

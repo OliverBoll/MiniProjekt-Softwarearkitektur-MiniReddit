@@ -72,7 +72,7 @@ app.MapGet("/api/posts/{id}", (DataService service, int id) =>
     return service.GetPost(id);
 });
 
-app.MapPost("/api/posts", (DataService service, NewPostData data) =>
+app.MapPost("/api/posts/createpost", (DataService service, NewPostData data) =>
 {
     string result = service.CreatePost(data.Title, data.Content, data.UserId);
     return new {message = result}; 
