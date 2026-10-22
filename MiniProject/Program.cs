@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Net.Mime;
 using System.Runtime.InteropServices.JavaScript;
 using Microsoft.EntityFrameworkCore;
@@ -76,6 +77,14 @@ app.MapPost("/api/posts", (DataService service, NewPostData data) =>
     return new {message = result}; 
 });
 
+app.MapPost("/api/posts/{id}/comments", (DataService service, NewCommentData data, int id) =>
+{
+    string result = service.CreateComment(data.Text, data.User, id);
+    return new {message = result};
+});
+
 app.Run();
 
 record NewPostData(string Title, string Content, int UserId);
+
+record NewCommentData(string Text, int User);
