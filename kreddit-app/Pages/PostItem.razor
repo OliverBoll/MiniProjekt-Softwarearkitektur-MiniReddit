@@ -45,7 +45,7 @@ else
             <tr>
                 <td>@comment.User.Name</td>
                 <td>@comment.Text</td>
-                <td>@(Post.Upvotes - Post.Downvotes)</td>
+                <td>@(comment.Upvotes - comment.Downvotes)</td>
                 <td><button @onclick="() => Upvote(comment.Id)">Upvote</button></td>
                 <td><button @onclick="() => Downvote(comment.Id)">Downvote</button></td>
             </tr>
@@ -70,7 +70,7 @@ else
     }
     private async void Upvote(int id)
     {
-        Console.WriteLine("Not implemented 😪");
+        var updatedComment = await apiService.UpvoteComment(PostId, id);
     }
 
     private async void Downvote(int id)
