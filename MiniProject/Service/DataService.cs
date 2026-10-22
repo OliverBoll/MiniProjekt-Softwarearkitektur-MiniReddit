@@ -136,7 +136,9 @@ public class DataService
    
    public string PostCommentUpvote(int postid, int commentid)
    {
-      Post? post = db.Posts.FirstOrDefault(p => p.Id == postid);
+      Post? post = db.Posts
+        .Include(p => p.Comment) 
+        .FirstOrDefault(p => p.Id == postid);
       Comments comment = post.Comment.FirstOrDefault(c => c.Id == commentid);
          
       comment.Upvotes++;
@@ -148,8 +150,10 @@ public class DataService
    
    public string PostCommentDownvote(int postid, int commentid)
    {
-      Post? post = db.Posts.FirstOrDefault(p => p.Id == postid);
-      Comments comment = post.Comment.FirstOrDefault(c => c.Id == commentid);
+      Post? post = db.Posts
+        .Include(p => p.Comment) 
+        .FirstOrDefault(p => p.Id == postid);
+      Comments? comment = post.Comment.FirstOrDefault(c => c.Id == commentid);
          
       comment.Downvotes++;
       

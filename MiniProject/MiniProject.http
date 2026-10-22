@@ -31,3 +31,11 @@ PUT {{MiniProject_HostAddress}}/api/posts/3/upvote
 
 ### Downvote et post (ret 1 til det ønskede post ID)
 PUT {{MiniProject_HostAddress}}/api/posts/3/downvote
+
+### Upvote en kommentar (ret 1 til post ID og 1 til comment ID)
+PUT {{MiniProject_HostAddress}}/api/posts/3/comments/4/upvote
+
+###
+
+### Downvote en kommentar (ret 1 til post ID og 1 til comment ID)
+PUT {{MiniProject_HostAddress}}/api/posts/3/comments/4/downvote
