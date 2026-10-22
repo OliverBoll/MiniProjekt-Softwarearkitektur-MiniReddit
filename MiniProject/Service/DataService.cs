@@ -111,4 +111,28 @@ public class DataService
       db.SaveChanges();
       return "Comment Created";
    }
+
+   public string PostUpvote(int postid)
+   {
+      Post? post = db.Posts.FirstOrDefault(p => p.Id == postid);
+
+      post.Upvotes = post.Upvotes++;
+      
+      db.SaveChanges();
+
+      return "Upvote made";
+   }
+   
+   public string PostDownvote(int postid)
+   {
+      Post? post = db.Posts.FirstOrDefault(p => p.Id == postid);
+
+      post.Downvotes = post.Downvotes--;
+      
+      db.SaveChanges();
+
+      return "Downvote made";
+   }
+   
+   
 }
