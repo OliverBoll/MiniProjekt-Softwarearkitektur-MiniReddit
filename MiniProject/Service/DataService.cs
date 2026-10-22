@@ -74,12 +74,8 @@ public class DataService
       return db.Posts
          .Include(p => p.User)
          .Include(p => p.Comment)
+               .ThenInclude(c => c.User)
          .FirstOrDefault(p => p.Id == id);
-   }
-
-   public List<User> GetUsers()
-   {
-      return db.Users.ToList();
    }
 
    public string CreatePost(string Title, string Content, int UserId)
@@ -90,7 +86,7 @@ public class DataService
       return "Post created";
    }
 
-   public string CreateComment(string text, int userId, int postId)
+   public string CreateComment(string content, int userId, int postId)
    {
       User? user = db.Users.FirstOrDefault(u => u.Id == userId);
       Post? post = db.Posts.FirstOrDefault(p => p.Id == postId);
@@ -102,7 +98,7 @@ public class DataService
 
       Comments comment = new Comments
       {
-        Text = text,
+        Text = content,
         User = user,
       };
 

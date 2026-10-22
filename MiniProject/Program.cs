@@ -61,6 +61,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+
 app.MapGet("/api/posts", (DataService service) =>
 {
     return service.GetPosts();
@@ -79,7 +80,7 @@ app.MapPost("/api/posts", (DataService service, NewPostData data) =>
 
 app.MapPost("/api/posts/{id}/comments", (DataService service, NewCommentData data, int id) =>
 {
-    string result = service.CreateComment(data.Text, data.User, id);
+    string result = service.CreateComment(data.Content, data.UserId, id);
     return new {message = result};
 });
 
@@ -111,4 +112,4 @@ app.Run();
 
 record NewPostData(string Title, string Content, int UserId);
 
-record NewCommentData(string Text, int User);
+record NewCommentData(string Content, int UserId);

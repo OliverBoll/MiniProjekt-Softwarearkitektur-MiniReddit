@@ -20,7 +20,7 @@ POST {{MiniProject_HostAddress}}/api/posts/3/comments
 Content-Type: application/json
 
 {
-  "text": "Dette er en rigtig god kommentar!",
+  "content": "Dette er en ny kommentar!",
   "user": 1
 }
 
