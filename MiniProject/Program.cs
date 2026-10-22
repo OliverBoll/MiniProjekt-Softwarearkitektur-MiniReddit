@@ -95,6 +95,18 @@ app.MapPut("/api/posts/{id}/downvote", (DataService service, int id) =>
     return new {message = "downvote made"};
 });
 
+app.MapPut("/api/posts/{postid}/comments/{commentid}/upvote", (DataService service, int postid, int commentid) =>
+{
+    string result = service.PostCommentUpvote(postid,commentid);
+    return new {message = "Upvote made"};
+});
+
+app.MapPut("/api/posts/{postid}/comments/{commentid}/downvote", (DataService service, int postid, int commentid) =>
+{
+    string result = service.PostCommentDownvote(postid, commentid);
+    return new {message = "downvote made"};
+});
+
 app.Run();
 
 record NewPostData(string Title, string Content, int UserId);
