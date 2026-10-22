@@ -81,4 +81,12 @@ public class DataService
    {
       return db.Users.ToList();
    }
+
+   public string CreatePost(string Title, string Content, int UserId)
+   {
+      User? user = db.Users.FirstOrDefault(u => u.Id == UserId);
+      db.Posts.Add(new Post { Title = Title, Content = Content, User = user });
+      db.SaveChanges();
+      return "Post created";
+   }
 }
