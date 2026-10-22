@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http.Json;
 using MiniProject.Data;
 using MiniProject.Service;
+using shared.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -66,6 +67,14 @@ app.MapGet("/api/posts", (DataService service) =>
 app.MapGet("/api/posts/{id}", (DataService service, int id) =>
 {
     return service.GetPost(id);
-}); 
+});
+
+app.MapGet("/api/posts", (DataService service, NewPostData data) =>
+{
+    string result = service.CreatePost(data.Title, data.Content, data.UserId);
+    return new {message = result}; 
+});
 
 app.Run();
+
+record NewPostData(string Title, string Content, int UserId);
