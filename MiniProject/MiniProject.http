@@ -1,6 +1,16 @@
 @MiniProject_HostAddress = http://localhost:5051
 
-GET {{MiniProject_HostAddress}}/weatherforecast/
+GET {{MiniProject_HostAddress}}/api/posts
 Accept: application/json
 
 ###
+
+### Opret nyt indlæg (Post)
+POST {{MiniProject_HostAddress}}/api/posts
+Content-Type: application/json
+
+{
+  "title": "Mit første Post",
+  "content": "Dette er indholdet af mit nye indlæg.",
+  "userId": 1
+}
